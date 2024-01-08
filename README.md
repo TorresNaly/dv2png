@@ -26,7 +26,7 @@ Uses Python
 
 # Installation
 > [!TIP]
-> I recommend installing [Anaconda](https://www.anaconda.com/) before installing this repository and all its dependencies.
+> Install [Anaconda](https://www.anaconda.com/) before installing this repository and all its dependencies.
 
 * Create conda environment
 ```
