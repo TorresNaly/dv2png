@@ -30,7 +30,8 @@ Uses Python
 
 * Create conda environment
 ```
-conda create --name dv2png_env
+# conda create --name dv2png_env
+conda create --name dv2png_env --file environment-local.yml
 ```
 * Activate conda environment
 ```
