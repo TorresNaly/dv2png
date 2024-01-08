@@ -2,18 +2,18 @@
 Author: Naly Torres
 
 # Description
-Repository to automatically download and organize deltavision images stored in the NAS.  This repository uses PySMB to access and transfer data between Network-attached storage (NAS) and a local or a remote server (Alpine-HPC). Microscope images are then organized in subdirectories for image analysis (non_decolvoved) or for experiment report/display (deconvolved). 
+Repository to automatically download and visualize deltavision files stored in the Network-attached storage (NAS). This repository uses PySMB to access and transfer data between NAS and a local (your computer) or a remote server (Alpine-HPC). Microscope images are then organized in subdirectories ready for creating a report (use deconvolved version) or image analysis (use non-deconvolved version).
 
 # Code Architecture
 
 
 ```mermaid
 flowchart TD
-    Experiments[smFISH images \n ** deltavision files **] --> B[Network-attached storage NAS \n ** PySMB **]
-    B -->|R3D_D3D.dv \n  R3D_REF.dv| C[Split channels and max project]
-    C --> D[save all in a  subdirectory \n repeat for all images in experiment folder]
+    Experiments[smFISH images \n ** deltavision files **] --> B[Connect to Network-attached storage NAS \n ** PySMB **]
+    B -->|Input:\n DV files deconvolved or non-deconvolved \n  and reference image | C[Split channels and max project]
+    C --> D[save all in a  subdirectory, \n repeat for all images in experiment folder]
     D --> B
-    B ---->|png \n deconvolved or non-deconvolved| E[Build report or image processing]
+    B ---->|Output:\n png images for each channel, \n for each image| E[Build report or image processing]
 ```
 
 # Code overview
