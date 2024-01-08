@@ -9,7 +9,7 @@ Repository to automatically download and organize deltavision images stored in t
 
 ```mermaid
 flowchart TD
-    Experiments[smFISH images *deltavision files*] --> B[Network-attached storage NAS *PySMB*]
+    Experiments[smFISH images \n ** deltavision files **] --> B[Network-attached storage NAS \n ** PySMB **]
     B -->|R3D_D3D.dv \n  R3D_REF.dv| C[Split channels and max project]
     C --> D[save all in a  subdirectory \n repeat for all images in experiment folder]
     D --> B
