@@ -25,9 +25,8 @@ PYsmb' #to connect to the NAS
 
 '----' #to 
 # Installation
-####  Create a conda environment
 > [!TIP]
-> We recommend installing [Anaconda](https://www.anaconda.com/) before installing packages and dependencies.
+> I recommend installing [Anaconda](https://www.anaconda.com/) before installing this repository and all its dependencies.
 
 * Create conda environment
 ```
