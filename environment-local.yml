@@ -1,5 +1,5 @@
 # This file may be used to create an environment using:
-# $ conda create --name <env> --file <this file>
+# $ conda create --name dv2png --file environment-local.yml
 # platform: osx-64
 absl-py=1.4.0=pypi_0
 anyio=3.6.2=pypi_0
