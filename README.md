@@ -18,15 +18,12 @@ flowchart TD
 
 # Code overview
 ## Network-attached storage (NAS) connection
-PYsmb' #to connect to the NAS
-
+Uses PySMB
 ## deltavision files access and organization
-
-'Bigfish' #to read the deltavision files
-
+Uses FISHquant
 ## saving as png
+Uses Python
 
-'----' #to 
 # Installation
 > [!TIP]
 > I recommend installing [Anaconda](https://www.anaconda.com/) before installing this repository and all its dependencies.
