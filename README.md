@@ -38,7 +38,7 @@ conda activate dv2png_env
 ```
 * Clone git repository
 ```
-git clone --depth 1 https://github.com/TorresNaly/dv-png.git
+git clone --depth 1 https://github.com/TorresNaly/dv2png.git
 ```
 #### Last edited Jan 7th, 2024. 
 
