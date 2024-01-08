@@ -1,4 +1,4 @@
-# Convert deltavision files to png
+# Convert deltavision files to png automatically
 Author: Naly Torres
 
 # Description
