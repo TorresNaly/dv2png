@@ -19,9 +19,9 @@ flowchart TD
 # Code overview
 ## Network-attached storage (NAS) connection
 Uses PySMB
-## deltavision files access and organization
+## access and read deltavision files
 Uses FISHquant
-## saving as png
+## save files as png in subdirectories
 Uses Python
 
 # Installation
