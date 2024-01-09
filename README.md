@@ -31,7 +31,7 @@ Uses Python
 * Create conda environment
 ```
 # conda create --name dv2png_env
-conda create --name dv2png_env --file environment-local.yml
+conda create --name dv2png_env --file dv2png_env_conda-environment.yml
 ```
 * Activate conda environment
 ```
