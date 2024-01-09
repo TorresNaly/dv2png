@@ -1,4 +1,6 @@
-name: dv2png
+# This file may be used to create an environment using:
+# $ conda create --name dv2png --file dv2png_env.yml
+name: dv2png_env
 channels:
   - conda-forge
   - bioconda
@@ -160,4 +162,4 @@ dependencies:
       - widgetsnbextension==3.6.4
       - wrapt==1.15.0
       - zipp==3.6.0
-prefix: /Users/onishlab/anaconda3/envs/bigfish_env
+# prefix: /Users/onishlab/anaconda3/envs/bigfish_env
