@@ -1,4 +1,4 @@
-name: bigfish_env
+name: dv2png
 channels:
   - conda-forge
   - bioconda
