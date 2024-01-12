@@ -37,7 +37,7 @@ conda create --name dv2png_env --file dv2png_env.yml
 ```
 conda activate dv2png_env
 ```
-* Clone git repository
+* Clone git repository. Make sure that you cd into the directory where you want to download these.
 ```
 git clone --depth 1 https://github.com/TorresNaly/dv2png.git
 ```
