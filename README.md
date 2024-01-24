@@ -6,15 +6,7 @@ Repository to automatically download and visualize deltavision files stored in t
 
 # Code Architecture
 
-
-```mermaid
-flowchart TD
-    Experiments[smFISH images \n ** deltavision files **] --> B[Connect to Network-attached storage NAS \n ** PySMB **]
-    B -->|Input:\n DV files deconvolved or non-deconvolved \n  and reference image | C[Split channels and max project]
-    C --> D[save all in a  subdirectory, \n repeat for all images in experiment folder]
-    D --> B
-    B ---->|Output:\n png images for each channel, \n for each image| E[Build report or image processing]
-```
+[Code architecture](https://github.com/TorresNaly/dv2png/blob/main/dv2png-code-arch.pdf)
 
 # Code overview
 ## Connect to Network-attached storage NAS
