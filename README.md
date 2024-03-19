@@ -8,11 +8,11 @@ Repository to automatically download and visualize deltavision files stored in t
 <img width="883" alt="Screen Shot 2024-01-24 at 3 29 38 PM" src="https://github.com/TorresNaly/dv2png/assets/85882411/21142b9e-1d09-4506-9d6a-551ad2a71132">
 
 # Code overview
-## Connect to Network-attached storage NAS
+### Connect to Network-attached storage NAS
 Uses PySMB
-## Access and read deltavision files
+### Access and read deltavision files
 Uses FISHquant
-## Save files as png in subdirectories
+### Save files as png in subdirectories
 Uses Python
 
 # Installation
