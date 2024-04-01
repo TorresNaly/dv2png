@@ -13,19 +13,27 @@ Repository to automatically download and visualize deltavision files stored in t
 
 * Create conda environment
 ```
-# conda create --name dv2png_env
+conda create --name dv2png_env
 ```
 * Activate conda environment
 ```
-# conda activate dv2png_env
+conda activate dv2png_env
 ```
 * Intall packages
 ```
-# conda install pip
-# pip install big-fish
-# pip install jupyter lab
-# pip install pysmb
-# pip install fpdf
+conda install pip
+```
+```
+pip install big-fish
+```
+```
+pip install jupyter lab
+```
+```
+pip install pysmb
+```
+```
+pip install fpdf
 ```
 * Clone git repository. Make sure that you cd into the directory where you want to download these.
 ```
