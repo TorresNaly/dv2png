@@ -2,7 +2,7 @@
 Author: Naly Torres
 
 # Description
-Repository to automatically download and visualize deltavision files stored in the Network-attached storage (NAS). This repository uses PySMB to access and transfer data between NAS and a local (your computer) or a remote server (Alpine-HPC). Microscope images are then organized in subdirectories ready for creating a report (use deconvolved version) or image analysis (use non-deconvolved version).
+Repository to automatically download and convert deltavision files to png. This repository uses PySMB to access and transfer data between the Network-attached storage (NAS) and a local server (your computer). Microscope images (png) are then saved in subdirectories and appended to a pdf report with their README file.
 
 # Code Architecture
 <img width="883" alt="Screen Shot 2024-01-24 at 3 29 38 PM" src="https://github.com/TorresNaly/dv2png/assets/85882411/21142b9e-1d09-4506-9d6a-551ad2a71132">
