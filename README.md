@@ -1,5 +1,6 @@
 # Convert deltavision files to png automatically
 Author: Naly Torres
+
 Affiliation: Dr. Erin Osborne Nishimura's Lab at Colorado State University
 
 # Description
