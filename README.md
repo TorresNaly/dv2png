@@ -1,5 +1,6 @@
 # Convert deltavision files to png automatically
 Author: Naly Torres
+Affiliation: Dr. Erin Osborne Nishimura's Lab at Colorado State University
 
 # Description
 Repository to automatically download and convert deltavision files to png. This repository uses PySMB to access and transfer data between the Network-attached storage (NAS) and a local server (your computer). Microscope images (.dv) are then saved as png individually and as a pdf report with their README file.
