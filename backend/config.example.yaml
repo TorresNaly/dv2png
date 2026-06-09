@@ -1,0 +1,22 @@
+# dv2png Configuration Template
+# Copy this to config.yaml and fill in your lab-specific details
+# DO NOT commit config.yaml to Git (it contains credentials)
+
+# NAS Connection Settings (specific to O'Nishimura lab - customize for your setup)
+nas:
+  nas_host: "your_nas_server_hostname_or_ip"
+  nas_user: "your_username"
+  nas_password: "your_password"
+  nas_share: "share_name"
+
+# Channel Configuration
+channels:
+  0: "Cy5"      # 670 channel (asymmetric control)
+  1: "mCherry"  # 610 channel (query RNA)
+  2: "FITC"     # Protein channel (protein markers)
+  3: "DAPI"     # Nuclear stain
+
+# Default Processing Parameters
+processing:
+  scale_factor: 2.0       # Brightness multiplier for channels
+  brightness_factor: 2    # Final brightness adjustment

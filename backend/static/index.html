@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>dv2png - FISH Image Converter</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 5px;
+        }
+        .header p {
+            opacity: 0.9;
+            font-size: 14px;
+        }
+        .content {
+            padding: 30px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #333;
+        }
+        input[type="text"],
+        input[type="number"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: inherit;
+            font-size: 14px;
+        }
+        input[type="text"]:focus,
+        input[type="number"]:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        .checkbox-group {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+        }
+        .checkbox-item input {
+            margin-right: 8px;
+            cursor: pointer;
+        }
+        .checkbox-item label {
+            margin: 0;
+            cursor: pointer;
+        }
+        .range-group {
+            display: grid;
+            grid-template-columns: 1fr 60px;
+            gap: 10px;
+            align-items: center;
+        }
+        input[type="range"] {
+            width: 100%;
+        }
+        .range-value {
+            text-align: center;
+            font-weight: 500;
+            color: #667eea;
+        }
+        button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+        button:active {
+            transform: translateY(0);
+        }
+        button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        .alert {
+            padding: 12px 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            display: none;
+        }
+        .alert.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .alert.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .alert.show {
+            display: block;
+        }
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 20px;
+        }
+        .tab {
+            padding: 12px 20px;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        .tab.active {
+            color: #667eea;
+            border-bottom-color: #667eea;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .jobs-list {
+            display: grid;
+            gap: 15px;
+        }
+        .job-card {
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 15px;
+            background: #f9f9f9;
+        }
+        .job-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .job-id {
+            font-family: monospace;
+            font-size: 12px;
+            color: #666;
+        }
+        .job-status {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        .status-pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+        .status-processing {
+            background: #cfe2ff;
+            color: #084298;
+        }
+        .status-completed {
+            background: #d1e7dd;
+            color: #0f5132;
+        }
+        .status-failed {
+            background: #f8d7da;
+            color: #842029;
+        }
+        .section {
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        .section:last-child {
+            border-bottom: none;
+        }
+        .section-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #667eea;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .loading {
+            display: inline-block;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>dv2png</h1>
+            <p>FISH Image Converter</p>
+        </div>
+        
+        <div class="content">
+            <div class="alert" id="alert"></div>
+            
+            <div class="tabs">
+                <div class="tab active" onclick="switchTab('form')">New Job</div>
+                <div class="tab" onclick="switchTab('jobs')">Dashboard</div>
+            </div>
+            
+            <!-- NEW JOB FORM -->
+            <div id="form" class="tab-content active">
+                <form id="jobForm" onsubmit="submitJob(event)">
+                    <div class="section">
+                        <div class="section-title">User Information</div>
+                        <div class="form-group">
+                            <label for="yourName">Your Name</label>
+                            <input type="text" id="yourName" name="yourName" required placeholder="John Doe">
+                        </div>
+                        <div class="form-group">
+                            <label for="imagedBy">Imaged By</label>
+                            <input type="text" id="imagedBy" name="imagedBy" required placeholder="Jane Smith">
+                        </div>
+                    </div>
+                    
+                    <div class="section">
+                        <div class="section-title">File Paths</div>
+                        <div class="form-group">
+                            <label for="inputDir">Input Directory</label>
+                            <input type="text" id="inputDir" name="inputDir" required placeholder="/path/to/images">
+                        </div>
+                        <div class="form-group">
+                            <label for="outputDir">Output Directory</label>
+                            <input type="text" id="outputDir" name="outputDir" required placeholder="/path/to/output">
+                        </div>
+                    </div>
+                    
+                    <div class="section">
+                        <div class="section-title">Channels</div>
+                        <div class="form-group">
+                            <label>Select channels for composite:</label>
+                            <div class="checkbox-group">
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="cy5" name="channels" value="Cy5">
+                                    <label for="cy5">Cy5 (670nm)</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="mcherry" name="channels" value="mCherry">
+                                    <label for="mcherry">mCherry (610nm)</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="fitc" name="channels" value="FITC">
+                                    <label for="fitc">FITC (Protein)</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="dapi" name="channels" value="DAPI">
+                                    <label for="dapi">DAPI (Nuclear)</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="section">
+                        <div class="section-title">Processing Options</div>
+                        <div class="form-group">
+                            <label for="scaleFactorLabel">Scale Factor</label>
+                            <div class="range-group">
+                                <input type="range" id="scaleFactor" name="scaleFactor" min="0.5" max="5" step="0.1" value="2.0" oninput="updateScaleFactor()">
+                                <span class="range-value" id="scaleFactorValue">2.0</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="brightnessFactorLabel">Brightness Factor</label>
+                            <div class="range-group">
+                                <input type="range" id="brightnessFactor" name="brightnessFactor" min="1" max="5" step="1" value="2" oninput="updateBrightnessFactor()">
+                                <span class="range-value" id="brightnessFactorValue">2</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" id="submitBtn">Submit Job</button>
+                </form>
+            </div>
+            
+            <!-- JOBS DASHBOARD -->
+            <div id="jobs" class="tab-content">
+                <div id="jobsList" class="jobs-list">
+                    <p style="color: #999; text-align: center; padding: 20px;">Loading jobs...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        const API_URL = 'http://localhost:5001/api';
+        
+        function switchTab(tab) {
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+            
+            event.target.classList.add('active');
+            document.getElementById(tab).classList.add('active');
+            
+            if (tab === 'jobs') {
+                loadJobs();
+            }
+        }
+        
+        function showAlert(message, type) {
+            const alertEl = document.getElementById('alert');
+            alertEl.textContent = message;
+            alertEl.className = `alert ${type} show`;
+            setTimeout(() => alertEl.classList.remove('show'), 5000);
+        }
+        
+        function updateScaleFactor() {
+            document.getElementById('scaleFactorValue').textContent = 
+                document.getElementById('scaleFactor').value;
+        }
+        
+        function updateBrightnessFactor() {
+            document.getElementById('brightnessFactorValue').textContent = 
+                document.getElementById('brightnessFactor').value;
+        }
+        
+        async function submitJob(e) {
+            e.preventDefault();
+            
+            const channels = Array.from(document.querySelectorAll('input[name="channels"]:checked'))
+                .map(ch => ch.value);
+            
+            if (channels.length === 0) {
+                showAlert('Please select at least one channel', 'error');
+                return;
+            }
+            
+            const btn = document.getElementById('submitBtn');
+            btn.disabled = true;
+            btn.innerHTML = '<span class="loading">⏳</span> Submitting...';
+            
+            try {
+                const response = await fetch(`${API_URL}/jobs`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        your_name: document.getElementById('yourName').value,
+                        imaged_by: document.getElementById('imagedBy').value,
+                        input_directory: document.getElementById('inputDir').value,
+                        output_directory: document.getElementById('outputDir').value,
+                        channel_names: {0: 'Cy5', 1: 'mCherry', 2: 'FITC', 3: 'DAPI'},
+                        include_channels: channels,
+                        scale_factor: parseFloat(document.getElementById('scaleFactor').value),
+                        brightness_factor: parseInt(document.getElementById('brightnessFactor').value),
+                        execution_mode: 'local'
+                    })
+                });
+                
+                const data = await response.json();
+                if (data.success) {
+                    showAlert(`✓ Job submitted! ID: ${data.data.job_id}`, 'success');
+                    document.getElementById('jobForm').reset();
+                    document.getElementById('scaleFactorValue').textContent = '2.0';
+                    document.getElementById('brightnessFactorValue').textContent = '2';
+                } else {
+                    showAlert(`✗ Error: ${data.message}`, 'error');
+                }
+            } catch (err) {
+                showAlert(`✗ Connection error: ${err.message}`, 'error');
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = 'Submit Job';
+            }
+        }
+        
+        async function loadJobs() {
+            try {
+                const response = await fetch(`${API_URL}/jobs?limit=20`);
+                const data = await response.json();
+                
+                if (!data.success || !data.data.jobs.length) {
+                    document.getElementById('jobsList').innerHTML = 
+                        '<p style="color: #999; text-align: center; padding: 20px;">No jobs yet</p>';
+                    return;
+                }
+                
+                document.getElementById('jobsList').innerHTML = data.data.jobs
+                    .map(job => `
+                        <div class="job-card">
+                            <div class="job-header">
+                                <span class="job-id">${job.job_id.substring(0, 8)}...</span>
+                                <span class="job-status status-${job.status}">${job.status.toUpperCase()}</span>
+                            </div>
+                            <p><strong>Input:</strong> ${job.parameters.input_directory}</p>
+                            <p><strong>Created:</strong> ${new Date(job.created_at).toLocaleString()}</p>
+                            ${job.error_message ? `<p style="color: red;"><strong>Error:</strong> ${job.error_message}</p>` : ''}
+                        </div>
+                    `).join('');
+            } catch (err) {
+                document.getElementById('jobsList').innerHTML = 
+                    `<p style="color: red; text-align: center;">Error loading jobs: ${err.message}</p>`;
+            }
+        }
+    </script>
+</body>
+</html>
