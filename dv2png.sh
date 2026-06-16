@@ -7,4 +7,4 @@ PORT=${1:-3000}  # Default to port 3000, or use first argument
 source /opt/anaconda3/etc/profile.d/conda.sh
 
 # Activate environment and launch app
-conda activate bigfish_env && cd /Users/nalytorres/Documents/GitHub/dv2png/backend && PORT=$PORT python app.py
+conda activate bigfish_env && cd /Users/nalytorres/Documents/GitHub/dv2png/backend && PORT=3000 python app.py
