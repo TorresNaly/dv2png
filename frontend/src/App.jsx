@@ -10,7 +10,7 @@ function App() {
       <AppBar position="static">
         <Toolbar>
           <Typography variant="h6">
-            dv2png - FISH Image Converter
+            dv2png - DeltaVision Image Converter
           </Typography>
         </Toolbar>
       </AppBar>
