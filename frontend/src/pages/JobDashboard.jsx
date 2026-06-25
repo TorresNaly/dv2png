@@ -104,14 +104,14 @@ function JobDashboard() {
   return (
     <Box sx={{ py: 4 }}>
       <Typography variant="h5" gutterBottom>
-        Job Dashboard
+        Processing Dashboard
       </Typography>
 
       {error && <Alert severity="error" sx={{ mb: 2 }}>{error}</Alert>}
 
       {jobs.length === 0 ? (
         <Alert severity="info">
-          No jobs yet. <Button onClick={() => navigate('/')}>Create a new job</Button>
+          No jobs have been submitted yet. <Button onClick={() => navigate('/')}>Start a new job</Button>
         </Alert>
       ) : (
         <TableContainer component={Paper}>
@@ -155,7 +155,7 @@ function JobDashboard() {
                         size="small"
                         onClick={() => handleDownloadResults(job.job_id)}
                       >
-                        Download
+                        Download Results
                       </Button>
                     )}
                     {job.status === 'failed' && (
@@ -176,7 +176,7 @@ function JobDashboard() {
         onClick={() => navigate('/')}
         sx={{ mt: 2 }}
       >
-        New Job
+        Submit Another Job
       </Button>
     </Box>
   );

@@ -20,11 +20,11 @@ import {
 } from '@mui/material';
 
 const steps = [
-  'User Information',
-  'File Paths',
-  'Channel Assignment',
-  'Processing Options',
-  'Review & Submit',
+  'User Info',
+  'Paths',
+  'Channels',
+  'Options',
+  'Review',
 ];
 
 function JobForm() {
@@ -36,9 +36,10 @@ function JobForm() {
   const [formData, setFormData] = useState({
     your_name: '',
     imaged_by: '',
-    input_directory: '',
-    output_directory: '',
-    channel_names: {},
+      nas_host: '',
+      nas_user: '',
+      nas_password: '',
+      nas_share: '',
     include_channels: [],
     scale_factor: 2.0,
     brightness_factor: 2,
@@ -88,8 +89,8 @@ function JobForm() {
 
   const validateStep = () => {
     if (activeStep === 0) {
-      if (!formData.your_name || !formData.imaged_by) {
-        setError('Please fill in all user information fields');
+      if (!formData.your_name || !formData.imaged_by || !formData.nas_host || !formData.nas_user || !formData.nas_password || !formData.nas_share) {
+        setError('Please fill in all user information and NAS credential fields');
         return false;
       }
     } else if (activeStep === 1) {
@@ -130,6 +131,10 @@ function JobForm() {
       setFormData({
         your_name: '',
         imaged_by: '',
+        nas_host: '',
+        nas_user: '',
+        nas_password: '',
+        nas_share: '',
         input_directory: '',
         output_directory: '',
         channel_names: config?.channels || {},
@@ -164,6 +169,37 @@ function JobForm() {
               value={formData.imaged_by}
               onChange={handleInputChange}
               fullWidth
+            />
+            <TextField
+              label="NAS Host"
+              name="nas_host"
+              value={formData.nas_host}
+              onChange={handleInputChange}
+              fullWidth
+              placeholder="nas.example.com"
+            />
+            <TextField
+              label="NAS Username"
+              name="nas_user"
+              value={formData.nas_user}
+              onChange={handleInputChange}
+              fullWidth
+            />
+            <TextField
+              label="NAS Password"
+              name="nas_password"
+              type="password"
+              value={formData.nas_password}
+              onChange={handleInputChange}
+              fullWidth
+            />
+            <TextField
+              label="NAS Share"
+              name="nas_share"
+              value={formData.nas_share}
+              onChange={handleInputChange}
+              fullWidth
+              placeholder="share_name"
             />
           </Box>
         );
@@ -258,7 +294,7 @@ function JobForm() {
         return (
           <Card>
             <CardContent>
-              <Typography variant="h6" gutterBottom>Review Your Settings</Typography>
+              <Typography variant="h6" gutterBottom>Review and submit your job</Typography>
               <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 2 }}>
                 <Box>
                   <Typography variant="subtitle2">Your Name:</Typography>
@@ -275,6 +311,18 @@ function JobForm() {
                 <Box>
                   <Typography variant="subtitle2">Output Directory:</Typography>
                   <Typography>{formData.output_directory}</Typography>
+                </Box>
+                <Box>
+                  <Typography variant="subtitle2">NAS Host:</Typography>
+                  <Typography>{formData.nas_host || 'Not provided'}</Typography>
+                </Box>
+                <Box>
+                  <Typography variant="subtitle2">NAS Username:</Typography>
+                  <Typography>{formData.nas_user || 'Not provided'}</Typography>
+                </Box>
+                <Box>
+                  <Typography variant="subtitle2">NAS Share:</Typography>
+                  <Typography>{formData.nas_share || 'Not provided'}</Typography>
                 </Box>
                 <Box>
                   <Typography variant="subtitle2">Channels in Composite:</Typography>
