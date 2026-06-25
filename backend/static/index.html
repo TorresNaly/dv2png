@@ -253,8 +253,32 @@
                     <div class="section">
                         <div class="section-title">User Information</div>
                         <div class="form-group">
+                            <label for="yourName">Your Name</label>
+                            <input type="text" id="yourName" name="yourName" required placeholder="John Doe">
+                        </div>
+                        <div class="form-group">
                             <label for="imagedBy">Imaged By</label>
                             <input type="text" id="imagedBy" name="imagedBy" required placeholder="Jane Smith">
+                        </div>
+                    </div>
+                    
+                    <div class="section">
+                        <div class="section-title">NAS Credentials</div>
+                        <div class="form-group">
+                            <label for="nasHost">NAS Host</label>
+                            <input type="text" id="nasHost" name="nasHost" required placeholder="nas.example.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="nasUser">NAS Username</label>
+                            <input type="text" id="nasUser" name="nasUser" required placeholder="nas_user">
+                        </div>
+                        <div class="form-group">
+                            <label for="nasPassword">NAS Password</label>
+                            <input type="password" id="nasPassword" name="nasPassword" required placeholder="Password">
+                        </div>
+                        <div class="form-group">
+                            <label for="nasShare">NAS Share</label>
+                            <input type="text" id="nasShare" name="nasShare" required placeholder="share_name">
                         </div>
                     </div>
                     
@@ -380,6 +404,10 @@
                     body: JSON.stringify({
                         your_name: document.getElementById('yourName').value,
                         imaged_by: document.getElementById('imagedBy').value,
+                        nas_host: document.getElementById('nasHost').value,
+                        nas_user: document.getElementById('nasUser').value,
+                        nas_password: document.getElementById('nasPassword').value,
+                        nas_share: document.getElementById('nasShare').value,
                         input_directory: document.getElementById('inputDir').value,
                         output_directory: document.getElementById('outputDir').value,
                         channel_names: {0: 'Cy5', 1: 'mCherry', 2: 'FITC', 3: 'DAPI'},
